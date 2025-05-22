@@ -8,28 +8,29 @@ import {
   Post,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { Task } from './task.model';
 
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
-  createTask(@Body() body: any): any[] {
+  createTask(@Body() body: Task): Task[] {
     return this.tasksService.createTask(body);
   }
 
   @Get()
-  getTasks(): any[] {
+  getTasks(): Task[] {
     return this.tasksService.getTasks();
   }
 
   @Get(':id')
-  getOneTask(@Param('id') id: string): any {
+  getOneTask(@Param('id') id: string): Task {
     return this.tasksService.getOneTask(id);
   }
 
   @Patch(':id')
-  updateTask(@Param('id') id: string, @Body() body: any): any {
+  updateTask(@Param('id') id: string, @Body() body: Task): Task {
     return this.tasksService.updateTask(id, body);
   }
 
